@@ -19,11 +19,13 @@ InstallGDT:
 
 ; isme gdt install karunga sabse phle gdt banate hai
 gdt_start:
-    ;sabse phla hai null descriptor 
+     
+; NULL descritor offset (0x0) Each entry is 8bytes remember  ;sabse phla hai null descriptor
     dd 0
     dd 0
 
-    ;ab iske baad hai code segment 
+; Kernel Code segment (0x8)
+
     dw 0FFFFh ; bhai yeh segment ki limit
     dw 0;  ; yeh base ke chhote 16bits
     db 0; yeh base ke middle 8bits
@@ -31,6 +33,7 @@ gdt_start:
     db 11001111b
     db 0; higher bits of base
 
+; kernel Data segment (0x10)
     ;ab banaunga datasegment- sab same rkh bss usme data descriptor karde
     dw 0FFFFh
     dw 0
@@ -38,6 +41,25 @@ gdt_start:
     db 10010010b
     db 11001111b
     db 0
+
+;User space code (0x18)
+
+    dw 0FFFFh
+    dw 0
+    db 0
+    db 11111010b ; just chnaged the ring level to 3
+    db 11001111b
+    db 0
+
+;User space data (0x20)
+
+    dw 0FFFFh
+    dw 0
+    db 0
+    db 11110010b ; just chnaged the ring level to 3
+    db 11001111b
+    db 0
+
 gdt_end:
 toc: ;pointer to the gdt
     dw gdt_end - gdt_start - 1; ;size -1 of gdt
