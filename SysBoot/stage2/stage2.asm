@@ -9,11 +9,11 @@ org 0x500				; we are loaded above bios
 
 jmp main				; jump to main
 
-%include "./include/stdio.inc"
-%include "./include/gdt.inc"
-%include "./include/a20.inc"
-%include "./include/fat12.inc"
-%include "./include/common.inc"
+%include "stdio.inc"
+%include "gdt.inc"
+%include "a20.inc"
+%include "fat12.inc"
+%include "common.inc"
 
 
 ;=================================================

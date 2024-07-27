@@ -14,7 +14,7 @@
 
 bits	16
 
-%include "./include/floppy16.inc"					; the erm.. floppy driver
+%include "floppy16.inc"					; the erm.. floppy driver
 
 %define ROOT_OFFSET 0x2e00
 %define FAT_SEG 0x2c0
