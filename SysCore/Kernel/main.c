@@ -1,5 +1,5 @@
 #include<debugDisplay.h>
-
+#include<hal.h>
 void main() {
     // Simple main function
     int  i=0x12;
@@ -7,16 +7,18 @@ void main() {
     debugGoToXY(4,4);
     debugSetColor(0x17);
     debugPrintf("+=============================\n");
-    debugPrintf("=         FalconOS            =\n");
+    debugPrintf("=         FALCONOS           =\n");
     debugPrintf("+=============================\n");
-    // const char* hello = "Hello there this is sanket !";
 
-    // char* video_memory = (char*) 0xb8000;
-    // while (*hello) {
-    //     *video_memory++ = *hello++;
-    //     *video_memory++ = 0x07; // Attribute-byte: light gray on black screen
-    // }
+    debugSetColor (0x70);
+	debugGoToXY(0,24);
+	debugPrintf (" Initializing Hardware Abstraction Layer (HAL.lib)...                           ");
+
+    halInitialize();
+
+    getInterrupt(2);
+
 
     // Loop indefinitely
-    while (1) { }
+    while (1) { ;}
 }

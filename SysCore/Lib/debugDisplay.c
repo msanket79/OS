@@ -99,7 +99,7 @@ void debugClrScr(const unsigned short c){
 void debugPutS(char *str ){
     if(!str) return;
 
-    for (size_t i = 0; i < str_len(str); i++)
+    for (size_t i = 0; i < strlen(str); i++)
     {
         debugPutC(str[i]);
     }
@@ -112,7 +112,7 @@ int debugPrintf(const char* str,...){
     }
     va_list args;
     va_start(args,str);
-    for(size_t i=0;i<str_len(str);i++){
+    for(size_t i=0;i<strlen(str);i++){
         switch(str[i]){
             case '%':
 

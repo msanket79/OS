@@ -90,7 +90,6 @@ main:
 
 	EnterStage3:
 
-
 		cli;
 		mov eax,cr0
 		or eax,1
@@ -127,25 +126,15 @@ stage3:
 		mov ecx,eax
 		rep movsd
 
+		;setup the data segments and stack 
+		mov	ax, 0x10		; set data segments to data selector (0x10)
+		mov	ds, ax
+		mov	ss, ax
+		mov	es, ax
+		mov	esp, 90000h		; stack begins from 90000h
 
-	;=================================================
-	;					Bahar se add kia hata dunga
-	;=================================================
-	mov	ax, 0x10		; set data segments to data selector (0x10)
-	mov	ds, ax
-	mov	ss, ax
-	mov	es, ax
-	mov	esp, 90000h		; stack begins from 90000h
 
-	;---------------------------------------;
-	;   Clear screen and print success	;
-	;---------------------------------------;
-
-	call	ClrScr32
-
-	;=================================================
-	;		Yaha tk add kia hai
-	;=================================================
+		call	ClrScr32
 		;=================================================
 		;			Execute the kernel
 		;=================================================

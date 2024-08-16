@@ -1,6 +1,6 @@
 BUILD_DIR = build
 
-.PHONY : all  floppy_image load debug bootloader stage1 stage2 kernel clean
+.PHONY : all  floppy_image load debug bootloader stage1 stage2 kernel clean debug-gdb
 
 all:floppy_image
 
@@ -18,9 +18,13 @@ $(BUILD_DIR)/main.img: bootloader kernel
 #dd command -- copies data from if to of bs--> is block size and count is how many blocks (/dev/zero will contain 0)
 
 load: floppy_image
-	@qemu-system-i386 -fda build/main.img
+	@qemu-system-i386 -fda  build/main.img 
 
 debug: floppy_image
+	@qemu-system-i386 -m 512m -object memory-backend-file,id=mem,size=512M,mem-path=./qemu-ram,share=on -machine memory-backend=mem -fda  build/main.img 
+
+
+debug-gdb: floppy_image
 	@qemu-system-i386 -fda build/main.img -s -S
 
 # bootloader
